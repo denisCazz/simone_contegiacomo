@@ -1,16 +1,111 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Simone Contegiacomo | Finanza e Innovazione">
+	<main>
+		<!-- Hero Section -->
+		<section class="relative h-screen flex items-center justify-center bg-slate-900 text-white overflow-hidden">
+			<div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 z-0"></div>
+			<div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center z-0"></div>
+			
+			<div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+				<h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight">Simone Contegiacomo</h1>
+				<p class="text-xl md:text-2xl text-slate-300 font-light tracking-wide mb-10">
+					L'eredità dell'eccellenza finanziaria, <br class="hidden md:block" />verso nuovi orizzonti.
+				</p>
+				<div class="flex flex-col md:flex-row gap-4 justify-center">
+					<a href="#chi-sono" class="inline-block px-8 py-3 border border-white/30 hover:bg-white hover:text-slate-900 transition-all duration-300 rounded-sm uppercase text-sm tracking-widest">
+						Scopri di più
+					</a>
+					<a href="#contatti" class="inline-block px-8 py-3 bg-white text-slate-900 hover:bg-slate-200 transition-all duration-300 rounded-sm uppercase text-sm tracking-widest font-bold">
+						Contattami
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Chi Sono Section -->
+		<section id="chi-sono" class="py-20 md:py-32 bg-white">
+			<div class="container mx-auto px-6 md:px-12">
+				<div class="flex flex-col md:flex-row items-center gap-16">
+					<div class="md:w-1/2">
+						<div class="relative">
+							<div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-slate-200"></div>
+							<img src="/simone.jpeg" alt="Simone Contegiacomo" class="w-full h-[500px] object-cover shadow-sm" />
+							<div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-4 border-r-4 border-slate-200"></div>
+						</div>
+					</div>
+					<div class="md:w-1/2">
+						<h2 class="text-4xl font-bold text-slate-900 mb-8">Una Storia di Famiglia</h2>
+						<p class="text-lg text-slate-600 mb-6 leading-relaxed">
+							Cresciuto a Bra con i valori trasmessi da mio padre, <strong>Sergio Contegiacomo</strong>, ho imparato che la finanza non è solo numeri, ma fiducia, visione e integrità.
+						</p>
+						<p class="text-lg text-slate-600 mb-6 leading-relaxed">
+							Come erede di una tradizione consolidata, il mio obiettivo è onorare il passato guardando al futuro. Unisco l'esperienza tramandata in famiglia con una prospettiva moderna sui mercati globali, per offrire una gestione patrimoniale attenta e innovativa.
+						</p>
+						<div class="mt-8 pt-8 border-t border-slate-100">
+							<p class="text-slate-500 italic">"La vera ricchezza è la capacità di costruire il domani."</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Valori / Vision Section -->
+		<section class="py-20 bg-slate-50">
+			<div class="container mx-auto px-6 md:px-12">
+				<div class="text-center max-w-3xl mx-auto mb-16">
+					<h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">I Miei Pilastri</h2>
+					<div class="w-20 h-1 bg-slate-900 mx-auto"></div>
+				</div>
+
+				<div class="grid md:grid-cols-3 gap-10">
+					<!-- Card 1 -->
+					<div class="bg-white p-10 shadow-sm hover:shadow-md transition-shadow duration-300 border-t-4 border-slate-800">
+						<h3 class="text-xl font-bold mb-4 text-slate-900">Integrità</h3>
+						<p class="text-slate-600">
+							La trasparenza e l'etica sono le fondamenta di ogni relazione duratura. Seguo le orme di mio padre nel mettere sempre l'interesse del cliente al primo posto.
+						</p>
+					</div>
+					<!-- Card 2 -->
+					<div class="bg-white p-10 shadow-sm hover:shadow-md transition-shadow duration-300 border-t-4 border-slate-600">
+						<h3 class="text-xl font-bold mb-4 text-slate-900">Innovazione</h3>
+						<p class="text-slate-600">
+							Il mondo della finanza evolve rapidamente. Porto nuovi strumenti e strategie digitali per massimizzare le opportunità in un mercato in continuo cambiamento.
+						</p>
+					</div>
+					<!-- Card 3 -->
+					<div class="bg-white p-10 shadow-sm hover:shadow-md transition-shadow duration-300 border-t-4 border-slate-400">
+						<h3 class="text-xl font-bold mb-4 text-slate-900">Territorio</h3>
+						<p class="text-slate-600">
+							Profondamente legato a Bra e alle sue eccellenze. Credo nel valore di sostenere e far crescere il tessuto economico locale con una visione internazionale.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Call to Action / Contact -->
+		<section id="contatti" class="py-20 bg-slate-900 text-white">
+			<div class="container mx-auto px-6 text-center">
+				<h2 class="text-3xl md:text-4xl font-bold mb-8">Costruiamo il Futuro Insieme</h2>
+				<p class="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">
+					Sono a disposizione per valutare nuove opportunità e collaborazioni.
+				</p>
+				<a href="mailto:info@simonecontegiacomo.it" class="inline-block bg-white text-slate-900 px-8 py-4 font-bold rounded-sm hover:bg-slate-100 transition-colors">
+					Contattami
+				</a>
+				<div class="mt-12 text-slate-400 text-sm">
+					<p>Bra (CN) - Italia</p>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="bg-slate-950 text-slate-500 py-8 border-t border-slate-900">
+		<div class="container mx-auto px-6 text-center text-sm">
+			<p>&copy; {new Date().getFullYear()} Simone Contegiacomo. Tutti i diritti riservati.</p>
+		</div>
+	</footer>
+</Layout>
