@@ -15,7 +15,7 @@ import Layout from '../layouts/Layout.astro';
 				</div>
 				<h1 class="text-4xl md:text-5xl font-bold mb-4">Calcolatore TFR</h1>
 				<p class="text-xl text-slate-300 max-w-3xl">
-					Confronta il TFR lasciato in azienda con il Fondo Pensione. Inserisci la tua RAL e scopri la differenza a fine carriera.
+					Confronta il TFR lasciato in azienda con il Fondo Pensione Allianz. Inserisci i tuoi dati e scopri la differenza a fine carriera.
 				</p>
 			</div>
 		</section>
@@ -26,14 +26,23 @@ import Layout from '../layouts/Layout.astro';
 				<div class="max-w-5xl mx-auto">
 					<!-- Input Card -->
 					<div class="bg-white rounded-lg shadow-xl p-8 md:p-10 mb-10">
-						<div class="flex justify-center mb-6">
-							<img src="https://www.este.it/wp-content/uploads/2021/10/AllianzBank.jpg" alt="Logo Allianz Bank" class="h-16 md:h-20 w-auto rounded-sm object-contain" loading="lazy" referrerpolicy="no-referrer" />
-						</div>
 						<h2 class="text-2xl font-bold text-slate-900 mb-6">Parametri di Calcolo</h2>
+
+						<!-- Nome e Cognome -->
+						<div class="grid md:grid-cols-2 gap-6 mb-8">
+							<div>
+								<label for="nome" class="block text-sm font-semibold text-slate-700 mb-2">Nome</label>
+								<input type="text" id="nome" placeholder="Inserisci il nome" class="w-full px-4 py-3 text-lg text-slate-900 border-2 border-slate-200 rounded-lg focus:border-slate-900 focus:outline-none transition-colors" />
+							</div>
+							<div>
+								<label for="cognome" class="block text-sm font-semibold text-slate-700 mb-2">Cognome</label>
+								<input type="text" id="cognome" placeholder="Inserisci il cognome" class="w-full px-4 py-3 text-lg text-slate-900 border-2 border-slate-200 rounded-lg focus:border-slate-900 focus:outline-none transition-colors" />
+							</div>
+						</div>
 
 						<!-- RAL Input -->
 						<div class="mb-8">
-							<label for="ral" class="block text-sm font-semibold text-slate-700 mb-2">RAL Annuale Lorda</label>
+							<label for="ral" class="block text-sm font-semibold text-slate-700 mb-2">Retribuzione Annua Lorda</label>
 							<div class="relative">
 								<span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold">&euro;</span>
 								<input
@@ -61,29 +70,28 @@ import Layout from '../layouts/Layout.astro';
 						<!-- Advanced Parameters -->
 						<div id="advancedPanel" class="hidden mb-8">
 							<div class="grid md:grid-cols-2 gap-6 p-6 bg-slate-50 rounded-lg border border-slate-200">
+								<div class="md:col-span-2">
+									<label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Versamento Annuo Costante (RAL / 13,5)</label>
+									<div class="relative">
+										<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-semibold">&euro;</span>
+										<input type="text" id="versamentoAnnuo" readonly class="w-full pl-8 pr-3 py-2 border border-slate-200 rounded-md bg-slate-100 text-slate-900 font-semibold cursor-not-allowed" />
+									</div>
+								</div>
 								<div>
-									<label for="anni" class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Anni di Carriera</label>
+									<label for="anni" class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Anni di Carriera Mancanti al Pensionamento</label>
 									<input type="number" id="anni" value="35" min="1" max="50" class="w-full px-3 py-2 border border-slate-200 rounded-md focus:border-slate-900 focus:outline-none text-slate-900 font-semibold" />
 								</div>
 								<div>
-									<label for="crescitaRal" class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Crescita RAL Annua (%)</label>
-									<input type="number" id="crescitaRal" value="1" min="0" max="10" step="0.1" class="w-full px-3 py-2 border border-slate-200 rounded-md focus:border-slate-900 focus:outline-none text-slate-900 font-semibold" />
+									<label for="rendTfr" class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Rendimento TFR in Azienda (%)</label>
+									<input type="number" id="rendTfr" value="2.5" min="0" max="20" step="0.1" class="w-full px-3 py-2 border border-slate-200 rounded-md focus:border-slate-900 focus:outline-none text-slate-900 font-semibold" />
 								</div>
 								<div>
-									<label for="inflazione" class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Inflazione Attesa (%)</label>
-									<input type="number" id="inflazione" value="0.8" min="0" max="10" step="0.1" class="w-full px-3 py-2 border border-slate-200 rounded-md focus:border-slate-900 focus:outline-none text-slate-900 font-semibold" />
-								</div>
-								<div>
-									<label for="rendAzionario" class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Rendimento Azionario (%)</label>
-									<input type="number" id="rendAzionario" value="6" min="0" max="20" step="0.1" class="w-full px-3 py-2 border border-slate-200 rounded-md focus:border-slate-900 focus:outline-none text-slate-900 font-semibold" />
-								</div>
-								<div>
-									<label for="rendBilanciato" class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Rendimento Bilanciato (%)</label>
+									<label for="rendBilanciato" class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Rendimento Allianz Bilanciata (%)</label>
 									<input type="number" id="rendBilanciato" value="4" min="0" max="20" step="0.1" class="w-full px-3 py-2 border border-slate-200 rounded-md focus:border-slate-900 focus:outline-none text-slate-900 font-semibold" />
 								</div>
 								<div>
-									<label for="ter" class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">TER Allianz (%)</label>
-									<input type="number" id="ter" value="0.8" min="0" max="5" step="0.1" class="w-full px-3 py-2 border border-slate-200 rounded-md focus:border-slate-900 focus:outline-none text-slate-900 font-semibold" />
+									<label for="rendAzionario" class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Rendimento Allianz Azionaria (%)</label>
+									<input type="number" id="rendAzionario" value="6" min="0" max="20" step="0.1" class="w-full px-3 py-2 border border-slate-200 rounded-md focus:border-slate-900 focus:outline-none text-slate-900 font-semibold" />
 								</div>
 								<div>
 									<label for="aliquotaTfr" class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Aliquota TFR Azienda (%)</label>
@@ -108,6 +116,11 @@ import Layout from '../layouts/Layout.astro';
 
 					<!-- Results (hidden initially) -->
 					<div id="risultati" class="hidden space-y-10 animate-fadeIn">
+						<!-- Client Name -->
+						<div id="clientHeader" class="hidden text-center">
+							<p class="text-lg font-semibold text-white">Simulazione per: <span id="clientName" class="text-slate-300"></span></p>
+						</div>
+
 						<!-- Summary Cards -->
 						<div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
 							<div class="bg-white rounded-lg shadow-lg p-6 md:p-8 border-t-4 border-slate-400">
@@ -116,12 +129,12 @@ import Layout from '../layouts/Layout.astro';
 								<p class="text-sm text-slate-400 mt-1">Netto stimato</p>
 							</div>
 							<div class="bg-white rounded-lg shadow-lg p-6 md:p-8 border-t-4 border-blue-500">
-								<p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Fondo Bilanciato</p>
+								<p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Allianz Bilanciata</p>
 								<p id="nettoBilanciato" class="text-2xl md:text-3xl font-bold text-blue-600">-</p>
 								<p id="diffBilanciato" class="text-sm text-green-600 mt-1 font-semibold">-</p>
 							</div>
 							<div class="bg-white rounded-lg shadow-lg p-6 md:p-8 border-t-4 border-emerald-500">
-								<p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Fondo Azionario</p>
+								<p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Allianz Azionaria</p>
 								<p id="nettoAzionario" class="text-2xl md:text-3xl font-bold text-emerald-600">-</p>
 								<p id="diffAzionario" class="text-sm text-green-600 mt-1 font-semibold">-</p>
 							</div>
@@ -135,7 +148,7 @@ import Layout from '../layouts/Layout.astro';
 							</div>
 						</div>
 
-						<!-- Vantaggio Fiscale -->
+						<!-- Vantaggio Fiscale - 3 IRPEF Boxes -->
 						<div class="bg-gradient-to-br from-amber-50 to-amber-100 rounded-lg shadow-lg p-6 md:p-8 border border-amber-200">
 							<div class="flex items-center gap-3 mb-4">
 								<div class="w-10 h-10 bg-amber-500/20 rounded-full flex items-center justify-center flex-shrink-0">
@@ -144,20 +157,53 @@ import Layout from '../layouts/Layout.astro';
 								<h3 class="text-xl font-bold text-amber-900">Vantaggio Fiscale Contributo Volontario</h3>
 							</div>
 							<p class="text-amber-800 mb-6 text-sm md:text-base">
-								Versando un contributo volontario al fondo pensione, puoi dedurre fino a <strong>5.164,57 &euro;/anno</strong> dal reddito imponibile IRPEF.
+								Versando un contributo volontario al fondo pensione, puoi dedurre fino a <strong>5.300 &euro;/anno</strong> dal reddito imponibile IRPEF.
 							</p>
 							<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-								<div class="bg-white/70 rounded-lg p-4">
-									<p class="text-xs font-semibold text-amber-700 uppercase tracking-wide mb-1">Aliquota Marginale IRPEF</p>
-									<p id="aliquotaIrpef" class="text-2xl font-bold text-amber-900">-</p>
+								<!-- Box 23% -->
+								<div class="bg-white/70 rounded-lg p-5">
+									<p class="text-sm font-bold text-amber-900 mb-1">Aliquota IRPEF 23%</p>
+									<p class="text-xs text-amber-600 mb-3">(reddito da 0 a 28.000 &euro;)</p>
+									<div class="space-y-3">
+										<div>
+											<p class="text-xs font-semibold text-amber-700 uppercase tracking-wide">Risparmio IRPEF / Anno</p>
+											<p id="risparmioAnnuo23" class="text-xl font-bold text-amber-900">-</p>
+										</div>
+										<div>
+											<p class="text-xs font-semibold text-amber-700 uppercase tracking-wide">Risparmio Cumulato</p>
+											<p id="risparmioCumulato23" class="text-xl font-bold text-amber-900">-</p>
+										</div>
+									</div>
 								</div>
-								<div class="bg-white/70 rounded-lg p-4">
-									<p class="text-xs font-semibold text-amber-700 uppercase tracking-wide mb-1">Risparmio IRPEF / Anno</p>
-									<p id="risparmioAnnuo" class="text-2xl font-bold text-amber-900">-</p>
+								<!-- Box 33% -->
+								<div class="bg-white/70 rounded-lg p-5">
+									<p class="text-sm font-bold text-amber-900 mb-1">Aliquota IRPEF 33%</p>
+									<p class="text-xs text-amber-600 mb-3">(reddito da 28.000 a 50.000 &euro;)</p>
+									<div class="space-y-3">
+										<div>
+											<p class="text-xs font-semibold text-amber-700 uppercase tracking-wide">Risparmio IRPEF / Anno</p>
+											<p id="risparmioAnnuo33" class="text-xl font-bold text-amber-900">-</p>
+										</div>
+										<div>
+											<p class="text-xs font-semibold text-amber-700 uppercase tracking-wide">Risparmio Cumulato</p>
+											<p id="risparmioCumulato33" class="text-xl font-bold text-amber-900">-</p>
+										</div>
+									</div>
 								</div>
-								<div class="bg-white/70 rounded-lg p-4">
-									<p class="text-xs font-semibold text-amber-700 uppercase tracking-wide mb-1">Risparmio Cumulato</p>
-									<p id="risparmioCumulato" class="text-2xl font-bold text-amber-900">-</p>
+								<!-- Box 43% -->
+								<div class="bg-white/70 rounded-lg p-5">
+									<p class="text-sm font-bold text-amber-900 mb-1">Aliquota IRPEF 43%</p>
+									<p class="text-xs text-amber-600 mb-3">(reddito oltre 50.000 &euro;)</p>
+									<div class="space-y-3">
+										<div>
+											<p class="text-xs font-semibold text-amber-700 uppercase tracking-wide">Risparmio IRPEF / Anno</p>
+											<p id="risparmioAnnuo43" class="text-xl font-bold text-amber-900">-</p>
+										</div>
+										<div>
+											<p class="text-xs font-semibold text-amber-700 uppercase tracking-wide">Risparmio Cumulato</p>
+											<p id="risparmioCumulato43" class="text-xl font-bold text-amber-900">-</p>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -171,8 +217,8 @@ import Layout from '../layouts/Layout.astro';
 										<tr class="border-b-2 border-slate-200">
 											<th class="py-3 pr-4 text-xs font-semibold text-slate-500 uppercase tracking-wide"></th>
 											<th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wide text-right">TFR Azienda</th>
-											<th class="py-3 px-4 text-xs font-semibold text-blue-500 uppercase tracking-wide text-right">Fondo Bilanciato</th>
-											<th class="py-3 px-4 text-xs font-semibold text-emerald-500 uppercase tracking-wide text-right">Fondo Azionario</th>
+											<th class="py-3 px-4 text-xs font-semibold text-blue-500 uppercase tracking-wide text-right">Allianz Bilanciata</th>
+											<th class="py-3 px-4 text-xs font-semibold text-emerald-500 uppercase tracking-wide text-right">Allianz Azionaria</th>
 										</tr>
 									</thead>
 									<tbody id="tabellaBody" class="text-sm">
@@ -181,9 +227,21 @@ import Layout from '../layouts/Layout.astro';
 							</div>
 						</div>
 
+						<!-- Download / Email Buttons -->
+						<div class="flex flex-col sm:flex-row gap-4 justify-center">
+							<button id="btnPdf" type="button" class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-white text-slate-900 font-bold rounded-lg hover:bg-slate-100 transition-colors shadow-lg">
+								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+								Scarica PDF
+							</button>
+							<button id="btnEmail" type="button" class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-slate-700 text-white font-bold rounded-lg hover:bg-slate-600 transition-colors shadow-lg">
+								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+								Invia via Email
+							</button>
+						</div>
+
 						<!-- Disclaimer -->
 						<p class="text-xs text-slate-500 text-center max-w-3xl mx-auto leading-relaxed">
-							I risultati sono stime basate su ipotesi di rendimento costante e non costituiscono consulenza finanziaria. 
+							I risultati sono stime basate su ipotesi di rendimento costante e non costituiscono consulenza finanziaria.
 							I rendimenti passati non sono indicativi di quelli futuri. Per una valutazione personalizzata, contatta un consulente finanziario.
 						</p>
 					</div>
@@ -202,89 +260,73 @@ import Layout from '../layouts/Layout.astro';
 	</footer>
 
 	<script is:inline src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+	<script is:inline src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 	<script is:inline>
 		let chartInstance = null;
 
-		function calcolaTfrAzienda(ral, anni, crescitaRal, inflazione, aliquotaTax) {
-			const rivalutazione = 0.015 + (0.75 * inflazione);
+		function aggiornaVersamentoAnnuo() {
+			const ral = parseFloat(document.getElementById('ral').value) || 0;
+			document.getElementById('versamentoAnnuo').value = new Intl.NumberFormat('it-IT', {
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 2
+			}).format(ral / 13.5);
+		}
+
+		function calcolaTfrAzienda(versamentoAnnuo, anni, rendTfr, aliquotaTfr) {
 			let montanteLordo = 0;
-			let currentRal = ral;
-			let totaleVersato = 0;
+			const totalVersato = versamentoAnnuo * anni;
 			const serieNetto = [];
 
 			for (let i = 0; i < anni; i++) {
-				const quotaTfr = currentRal * 0.0691;
-				totaleVersato += quotaTfr;
-				montanteLordo = (montanteLordo * (1 + rivalutazione)) + quotaTfr;
-				currentRal *= (1 + crescitaRal);
-				serieNetto.push(Math.round(montanteLordo * (1 - aliquotaTax)));
+				montanteLordo = montanteLordo * (1 + rendTfr) + versamentoAnnuo;
+				const taxSoFar = versamentoAnnuo * (i + 1) * aliquotaTfr;
+				serieNetto.push(Math.round(montanteLordo - taxSoFar));
 			}
 
+			const tax = totalVersato * aliquotaTfr;
 			return {
 				lordo: montanteLordo,
-				netto: montanteLordo * (1 - aliquotaTax),
-				versato: totaleVersato,
+				netto: montanteLordo - tax,
+				versato: totalVersato,
 				serieNetto: serieNetto
 			};
 		}
 
-		function calcolaFondoPensione(ral, anni, crescitaRal, rendimento, costo, aliquotaTax) {
-			const rNettoFinanziario = rendimento - costo;
+		function calcolaFondoPensione(versamentoAnnuo, anni, rendimento, aliquotaFondo) {
 			let montanteLordo = 0;
-			let totaleVersato = 0;
-			let currentRal = ral;
+			const totalVersato = versamentoAnnuo * anni;
+			const rNetto = rendimento * (1 - 0.20);
 			const serieNetto = [];
 
 			for (let i = 0; i < anni; i++) {
-				const quotaTfr = currentRal * 0.0691;
-				totaleVersato += quotaTfr;
-				const rReale = rNettoFinanziario * (1 - 0.20);
-				montanteLordo = (montanteLordo * (1 + rReale)) + quotaTfr;
-				currentRal *= (1 + crescitaRal);
-
-				const rendGen = montanteLordo - totaleVersato;
-				const nettoAnno = (totaleVersato * (1 - aliquotaTax)) + rendGen;
-				serieNetto.push(Math.round(nettoAnno));
+				montanteLordo = montanteLordo * (1 + rNetto) + versamentoAnnuo;
+				const taxSoFar = versamentoAnnuo * (i + 1) * aliquotaFondo;
+				serieNetto.push(Math.round(montanteLordo - taxSoFar));
 			}
 
-			const rendimentiGenerati = montanteLordo - totaleVersato;
-			const netto = (totaleVersato * (1 - aliquotaTax)) + rendimentiGenerati;
-
+			const tax = totalVersato * aliquotaFondo;
 			return {
 				lordo: montanteLordo,
-				netto: netto,
-				versato: totaleVersato,
-				rendimenti: rendimentiGenerati,
+				netto: montanteLordo - tax,
+				versato: totalVersato,
+				rendimenti: montanteLordo - totalVersato,
 				serieNetto: serieNetto
 			};
 		}
 
-		function getAliquotaMarginaleIRPEF(ral) {
-			if (ral <= 15000) return 0.23;
-			if (ral <= 28000) return 0.25;
-			if (ral <= 50000) return 0.35;
+		function calcolaVantaggioFiscale(anni) {
+			const importo = 5300;
+			return [
+				{ aliquota: 0.23, risparmioAnnuo: importo * 0.23, risparmioCumulato: importo * 0.23 * anni },
+				{ aliquota: 0.33, risparmioAnnuo: importo * 0.33, risparmioCumulato: importo * 0.33 * anni },
+				{ aliquota: 0.43, risparmioAnnuo: importo * 0.43, risparmioCumulato: importo * 0.43 * anni }
+			];
+		}
+
+		function getAliquotaApplicabile(ral) {
+			if (ral <= 28000) return 0.23;
+			if (ral <= 50000) return 0.33;
 			return 0.43;
-		}
-
-		function calcolaVantaggioFiscale(ral, anni, crescitaRal) {
-			const maxDeducibile = 5164.57;
-			const aliquota = getAliquotaMarginaleIRPEF(ral);
-			let risparmioAnnuo = Math.min(maxDeducibile, ral * 0.0691) * aliquota;
-			let risparmioCumulato = 0;
-			let currentRal = ral;
-
-			for (let i = 0; i < anni; i++) {
-				const contributo = Math.min(maxDeducibile, currentRal * 0.0691);
-				const aliq = getAliquotaMarginaleIRPEF(currentRal);
-				risparmioCumulato += contributo * aliq;
-				currentRal *= (1 + crescitaRal);
-			}
-
-			return {
-				aliquota: aliquota,
-				risparmioAnnuo: risparmioAnnuo,
-				risparmioCumulato: risparmioCumulato
-			};
 		}
 
 		function formatCurrency(val) {
@@ -296,26 +338,34 @@ import Layout from '../layouts/Layout.astro';
 			}).format(val);
 		}
 
-		function formatPercent(val) {
-			return (val * 100).toFixed(0) + '%';
-		}
-
 		function eseguiCalcolo() {
 			const ral = parseFloat(document.getElementById('ral').value);
 			const anni = parseInt(document.getElementById('anni').value);
-			const crescitaRal = parseFloat(document.getElementById('crescitaRal').value) / 100;
-			const inflazione = parseFloat(document.getElementById('inflazione').value) / 100;
+			const rendTfr = parseFloat(document.getElementById('rendTfr').value) / 100;
 			const rendAzionario = parseFloat(document.getElementById('rendAzionario').value) / 100;
 			const rendBilanciato = parseFloat(document.getElementById('rendBilanciato').value) / 100;
-			const ter = parseFloat(document.getElementById('ter').value) / 100;
 			const aliquotaTfr = parseFloat(document.getElementById('aliquotaTfr').value) / 100;
 			const aliquotaFondo = parseFloat(document.getElementById('aliquotaFondo').value) / 100;
 
-			const tfr = calcolaTfrAzienda(ral, anni, crescitaRal, inflazione, aliquotaTfr);
-			const fondoAz = calcolaFondoPensione(ral, anni, crescitaRal, rendAzionario, ter, aliquotaFondo);
-			const fondoBil = calcolaFondoPensione(ral, anni, crescitaRal, rendBilanciato, ter, aliquotaFondo);
-			const fiscale = calcolaVantaggioFiscale(ral, anni, crescitaRal);
+			const versamentoAnnuo = ral / 13.5;
 
+			const tfr = calcolaTfrAzienda(versamentoAnnuo, anni, rendTfr, aliquotaTfr);
+			const fondoAz = calcolaFondoPensione(versamentoAnnuo, anni, rendAzionario, aliquotaFondo);
+			const fondoBil = calcolaFondoPensione(versamentoAnnuo, anni, rendBilanciato, aliquotaFondo);
+			const fiscale = calcolaVantaggioFiscale(anni);
+
+			// Client name
+			const nome = document.getElementById('nome').value.trim();
+			const cognome = document.getElementById('cognome').value.trim();
+			const clientHeader = document.getElementById('clientHeader');
+			if (nome || cognome) {
+				document.getElementById('clientName').textContent = (nome + ' ' + cognome).trim();
+				clientHeader.classList.remove('hidden');
+			} else {
+				clientHeader.classList.add('hidden');
+			}
+
+			// Summary cards
 			document.getElementById('nettoAzienda').textContent = formatCurrency(tfr.netto);
 			document.getElementById('nettoBilanciato').textContent = formatCurrency(fondoBil.netto);
 			document.getElementById('nettoAzionario').textContent = formatCurrency(fondoAz.netto);
@@ -327,12 +377,16 @@ import Layout from '../layouts/Layout.astro';
 			document.getElementById('diffBilanciato').className = 'text-sm mt-1 font-semibold ' + (diffBil >= 0 ? 'text-green-600' : 'text-red-600');
 			document.getElementById('diffAzionario').className = 'text-sm mt-1 font-semibold ' + (diffAz >= 0 ? 'text-green-600' : 'text-red-600');
 
-			document.getElementById('aliquotaIrpef').textContent = formatPercent(fiscale.aliquota);
-			document.getElementById('risparmioAnnuo').textContent = formatCurrency(fiscale.risparmioAnnuo);
-			document.getElementById('risparmioCumulato').textContent = formatCurrency(fiscale.risparmioCumulato);
+			// IRPEF boxes
+			document.getElementById('risparmioAnnuo23').textContent = formatCurrency(fiscale[0].risparmioAnnuo);
+			document.getElementById('risparmioCumulato23').textContent = formatCurrency(fiscale[0].risparmioCumulato);
+			document.getElementById('risparmioAnnuo33').textContent = formatCurrency(fiscale[1].risparmioAnnuo);
+			document.getElementById('risparmioCumulato33').textContent = formatCurrency(fiscale[1].risparmioCumulato);
+			document.getElementById('risparmioAnnuo43').textContent = formatCurrency(fiscale[2].risparmioAnnuo);
+			document.getElementById('risparmioCumulato43').textContent = formatCurrency(fiscale[2].risparmioCumulato);
 
 			renderChart(tfr, fondoBil, fondoAz, anni);
-			renderTable(tfr, fondoBil, fondoAz, fiscale);
+			renderTable(tfr, fondoBil, fondoAz, ral, anni);
 
 			document.getElementById('risultati').classList.remove('hidden');
 			document.getElementById('risultati').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -366,7 +420,7 @@ import Layout from '../layouts/Layout.astro';
 							pointHoverBackgroundColor: 'rgb(148,163,184)'
 						},
 						{
-							label: 'Fondo Bilanciato',
+							label: 'Allianz Bilanciata',
 							data: fondoBil.serieNetto,
 							borderColor: 'rgb(59,130,246)',
 							backgroundColor: 'rgba(59,130,246,0.1)',
@@ -378,7 +432,7 @@ import Layout from '../layouts/Layout.astro';
 							pointHoverBackgroundColor: 'rgb(59,130,246)'
 						},
 						{
-							label: 'Fondo Azionario',
+							label: 'Allianz Azionaria',
 							data: fondoAz.serieNetto,
 							borderColor: 'rgb(16,185,129)',
 							backgroundColor: 'rgba(16,185,129,0.1)',
@@ -446,7 +500,11 @@ import Layout from '../layouts/Layout.astro';
 			});
 		}
 
-		function renderTable(tfr, fondoBil, fondoAz, fiscale) {
+		function renderTable(tfr, fondoBil, fondoAz, ral, anni) {
+			const aliquotaApplicabile = getAliquotaApplicabile(ral);
+			const risparmioAnnuo = 5300 * aliquotaApplicabile;
+			const risparmioCumulato = risparmioAnnuo * anni;
+
 			const rows = [
 				{
 					label: 'Totale Versato (Quote TFR)',
@@ -477,15 +535,15 @@ import Layout from '../layouts/Layout.astro';
 				{
 					label: 'Vantaggio Fiscale Cumulato (Contributo Volontario)',
 					azienda: null,
-					bilanciato: fiscale.risparmioCumulato,
-					azionario: fiscale.risparmioCumulato,
+					bilanciato: risparmioCumulato,
+					azionario: risparmioCumulato,
 					highlight: true
 				},
 				{
 					label: 'Totale con Vantaggio Fiscale',
 					azienda: tfr.netto,
-					bilanciato: fondoBil.netto + fiscale.risparmioCumulato,
-					azionario: fondoAz.netto + fiscale.risparmioCumulato,
+					bilanciato: fondoBil.netto + risparmioCumulato,
+					azionario: fondoAz.netto + risparmioCumulato,
 					bold: true,
 					highlight: true
 				}
@@ -522,6 +580,7 @@ import Layout from '../layouts/Layout.astro';
 			});
 		}
 
+		// Event listeners
 		document.getElementById('toggleAdvanced').addEventListener('click', function() {
 			const panel = document.getElementById('advancedPanel');
 			const arrow = document.getElementById('advancedArrow');
@@ -534,6 +593,279 @@ import Layout from '../layouts/Layout.astro';
 		document.getElementById('ral').addEventListener('keydown', function(e) {
 			if (e.key === 'Enter') eseguiCalcolo();
 		});
+
+		document.getElementById('ral').addEventListener('input', aggiornaVersamentoAnnuo);
+
+		// PDF download
+		document.getElementById('btnPdf').addEventListener('click', function() {
+			var btn = this;
+			var originalHTML = btn.innerHTML;
+			btn.disabled = true;
+			btn.textContent = 'Generazione PDF...';
+
+			try {
+				var jsPDF = window.jspdf.jsPDF;
+				var pdf = new jsPDF('p', 'mm', 'a4');
+				var pageW = pdf.internal.pageSize.getWidth();
+				var margin = 15;
+				var usable = pageW - margin * 2;
+				var y = 20;
+
+				// Header
+				pdf.setFontSize(22);
+				pdf.setFont('helvetica', 'bold');
+				pdf.setTextColor(15, 23, 42);
+				pdf.text('Simulazione TFR', margin, y);
+				y += 10;
+
+				var nome = document.getElementById('nome').value.trim();
+				var cognome = document.getElementById('cognome').value.trim();
+				if (nome || cognome) {
+					pdf.setFontSize(14);
+					pdf.setFont('helvetica', 'normal');
+					pdf.setTextColor(100, 116, 139);
+					pdf.text('Cliente: ' + (nome + ' ' + cognome).trim(), margin, y);
+					y += 8;
+				}
+
+				var ral = document.getElementById('ral').value;
+				var anni = document.getElementById('anni').value;
+				pdf.setFontSize(11);
+				pdf.setTextColor(100, 116, 139);
+				pdf.text('Retribuzione Annua Lorda: \u20AC ' + parseInt(ral).toLocaleString('it-IT'), margin, y);
+				y += 6;
+				pdf.text('Anni mancanti al pensionamento: ' + anni, margin, y);
+				y += 6;
+				pdf.text('Versamento annuo costante (RAL/13,5): \u20AC ' + (parseFloat(ral) / 13.5).toLocaleString('it-IT', {minimumFractionDigits: 2, maximumFractionDigits: 2}), margin, y);
+				y += 12;
+
+				// Separator
+				pdf.setDrawColor(226, 232, 240);
+				pdf.setLineWidth(0.5);
+				pdf.line(margin, y, pageW - margin, y);
+				y += 10;
+
+				// Summary boxes
+				pdf.setFontSize(12);
+				pdf.setFont('helvetica', 'bold');
+				pdf.setTextColor(15, 23, 42);
+				pdf.text('Risultati Simulazione', margin, y);
+				y += 10;
+
+				var nettoAz = document.getElementById('nettoAzienda').textContent;
+				var nettoBil = document.getElementById('nettoBilanciato').textContent;
+				var nettoAzn = document.getElementById('nettoAzionario').textContent;
+				var diffBil = document.getElementById('diffBilanciato').textContent;
+				var diffAzn = document.getElementById('diffAzionario').textContent;
+
+				var boxW = (usable - 10) / 3;
+				var boxes = [
+					{ title: 'TFR in Azienda', value: nettoAz, sub: 'Netto stimato', color: [148, 163, 184] },
+					{ title: 'Allianz Bilanciata', value: nettoBil, sub: diffBil, color: [59, 130, 246] },
+					{ title: 'Allianz Azionaria', value: nettoAzn, sub: diffAzn, color: [16, 185, 129] }
+				];
+
+				boxes.forEach(function(box, i) {
+					var bx = margin + i * (boxW + 5);
+					pdf.setFillColor(248, 250, 252);
+					pdf.roundedRect(bx, y, boxW, 30, 2, 2, 'F');
+					pdf.setDrawColor(box.color[0], box.color[1], box.color[2]);
+					pdf.setLineWidth(1);
+					pdf.line(bx, y, bx + boxW, y);
+					pdf.setFontSize(8);
+					pdf.setFont('helvetica', 'bold');
+					pdf.setTextColor(100, 116, 139);
+					pdf.text(box.title.toUpperCase(), bx + 4, y + 7);
+					pdf.setFontSize(14);
+					pdf.setTextColor(15, 23, 42);
+					pdf.text(box.value, bx + 4, y + 17);
+					pdf.setFontSize(7);
+					pdf.setTextColor(100, 116, 139);
+					pdf.text(box.sub, bx + 4, y + 24);
+				});
+				y += 40;
+
+				// Chart as image
+				var chartCanvas = document.getElementById('tfrChart');
+				if (chartCanvas) {
+					try {
+						var chartImg = chartCanvas.toDataURL('image/png', 1.0);
+						var chartW = usable;
+						var chartH = chartW * 0.5;
+						pdf.setFontSize(12);
+						pdf.setFont('helvetica', 'bold');
+						pdf.setTextColor(15, 23, 42);
+						pdf.text('Evoluzione del Montante Netto', margin, y);
+						y += 5;
+						pdf.addImage(chartImg, 'PNG', margin, y, chartW, chartH);
+						y += chartH + 10;
+					} catch(e) {
+						y += 5;
+					}
+				}
+
+				// IRPEF section
+				if (y > 230) { pdf.addPage(); y = 20; }
+				pdf.setFontSize(12);
+				pdf.setFont('helvetica', 'bold');
+				pdf.setTextColor(15, 23, 42);
+				pdf.text('Vantaggio Fiscale Contributo Volontario', margin, y);
+				y += 4;
+				pdf.setFontSize(9);
+				pdf.setFont('helvetica', 'normal');
+				pdf.setTextColor(100, 116, 139);
+				pdf.text('Deduzione fino a 5.300 \u20AC/anno dal reddito imponibile IRPEF', margin, y);
+				y += 8;
+
+				var irpefBoxes = [
+					{
+						title: 'Aliquota IRPEF 23%',
+						sub: '(reddito da 0 a 28.000 \u20AC)',
+						annuo: document.getElementById('risparmioAnnuo23').textContent,
+						cumulato: document.getElementById('risparmioCumulato23').textContent
+					},
+					{
+						title: 'Aliquota IRPEF 33%',
+						sub: '(reddito da 28.000 a 50.000 \u20AC)',
+						annuo: document.getElementById('risparmioAnnuo33').textContent,
+						cumulato: document.getElementById('risparmioCumulato33').textContent
+					},
+					{
+						title: 'Aliquota IRPEF 43%',
+						sub: '(reddito oltre 50.000 \u20AC)',
+						annuo: document.getElementById('risparmioAnnuo43').textContent,
+						cumulato: document.getElementById('risparmioCumulato43').textContent
+					}
+				];
+
+				irpefBoxes.forEach(function(box, i) {
+					var bx = margin + i * (boxW + 5);
+					pdf.setFillColor(255, 251, 235);
+					pdf.roundedRect(bx, y, boxW, 35, 2, 2, 'F');
+					pdf.setFontSize(9);
+					pdf.setFont('helvetica', 'bold');
+					pdf.setTextColor(120, 53, 15);
+					pdf.text(box.title, bx + 3, y + 7);
+					pdf.setFontSize(7);
+					pdf.setFont('helvetica', 'normal');
+					pdf.setTextColor(180, 83, 9);
+					pdf.text(box.sub, bx + 3, y + 12);
+					pdf.setFontSize(7);
+					pdf.setFont('helvetica', 'bold');
+					pdf.setTextColor(120, 53, 15);
+					pdf.text('RISPARMIO IRPEF / ANNO', bx + 3, y + 19);
+					pdf.setFontSize(11);
+					pdf.text(box.annuo, bx + 3, y + 25);
+					pdf.setFontSize(7);
+					pdf.text('RISPARMIO CUMULATO', bx + 3, y + 30);
+					pdf.setFontSize(11);
+					pdf.text(box.cumulato, bx + 3, y + 36);
+				});
+				y += 45;
+
+				// Table
+				if (y > 200) { pdf.addPage(); y = 20; }
+				pdf.setFontSize(12);
+				pdf.setFont('helvetica', 'bold');
+				pdf.setTextColor(15, 23, 42);
+				pdf.text('Riepilogo Dettagliato', margin, y);
+				y += 8;
+
+				var tableRows = document.querySelectorAll('#tabellaBody tr');
+				var headers = ['', 'TFR Azienda', 'Allianz Bilanciata', 'Allianz Azionaria'];
+				var colW = [usable * 0.34, usable * 0.22, usable * 0.22, usable * 0.22];
+
+				pdf.setFillColor(248, 250, 252);
+				pdf.rect(margin, y - 1, usable, 8, 'F');
+				pdf.setFontSize(7);
+				pdf.setFont('helvetica', 'bold');
+				pdf.setTextColor(100, 116, 139);
+				var cx = margin;
+				headers.forEach(function(h, i) {
+					pdf.text(h, i === 0 ? cx + 2 : cx + colW[i] - 2, y + 4, i === 0 ? {} : { align: 'right' });
+					cx += colW[i];
+				});
+				y += 10;
+
+				pdf.setFontSize(8);
+				tableRows.forEach(function(tr) {
+					if (y > 275) { pdf.addPage(); y = 20; }
+					var cells = tr.querySelectorAll('td');
+					var isHighlight = tr.className.indexOf('bg-amber') !== -1;
+					var isBold = cells[0] && cells[0].className.indexOf('font-bold') !== -1;
+
+					if (isHighlight) {
+						pdf.setFillColor(255, 251, 235);
+						pdf.rect(margin, y - 3, usable, 7, 'F');
+					}
+
+					pdf.setFont('helvetica', isBold ? 'bold' : 'normal');
+					pdf.setTextColor(15, 23, 42);
+					cx = margin;
+					cells.forEach(function(cell, i) {
+						var txt = cell.textContent.trim();
+						if (i === 0) {
+							pdf.text(txt, cx + 2, y + 1, { maxWidth: colW[0] - 4 });
+						} else {
+							pdf.text(txt, cx + colW[i] - 2, y + 1, { align: 'right' });
+						}
+						cx += colW[i];
+					});
+					y += 7;
+				});
+
+				y += 10;
+
+				// Disclaimer
+				if (y > 265) { pdf.addPage(); y = 20; }
+				pdf.setFontSize(7);
+				pdf.setFont('helvetica', 'normal');
+				pdf.setTextColor(148, 163, 184);
+				pdf.text('I risultati sono stime basate su ipotesi di rendimento costante e non costituiscono consulenza finanziaria.', margin, y, { maxWidth: usable });
+				y += 5;
+				pdf.text('I rendimenti passati non sono indicativi di quelli futuri. Per una valutazione personalizzata, contatta un consulente finanziario.', margin, y, { maxWidth: usable });
+
+				var fileName = (nome || cognome)
+					? 'Simulazione_TFR_' + (nome + '_' + cognome).trim().replace(/\s+/g, '_') + '.pdf'
+					: 'Simulazione_TFR.pdf';
+				pdf.save(fileName);
+			} catch (err) {
+				console.error('Errore PDF:', err);
+				alert('Errore nella generazione del PDF. Riprova.');
+			}
+
+			btn.disabled = false;
+			btn.innerHTML = originalHTML;
+		});
+
+		// Email
+		document.getElementById('btnEmail').addEventListener('click', function() {
+			var nome = document.getElementById('nome').value.trim();
+			var cognome = document.getElementById('cognome').value.trim();
+			var ral = document.getElementById('ral').value;
+			var nettoAz = document.getElementById('nettoAzienda').textContent;
+			var nettoBil = document.getElementById('nettoBilanciato').textContent;
+			var nettoAzn = document.getElementById('nettoAzionario').textContent;
+			var anni = document.getElementById('anni').value;
+
+			var subject = encodeURIComponent('Simulazione TFR' + (nome || cognome ? ' - ' + (nome + ' ' + cognome).trim() : ''));
+			var body = encodeURIComponent(
+				'Simulazione TFR' + (nome || cognome ? ' per ' + (nome + ' ' + cognome).trim() : '') + '\n\n' +
+				'Retribuzione Annua Lorda: \u20AC ' + parseInt(ral).toLocaleString('it-IT') + '\n' +
+				'Anni di carriera mancanti: ' + anni + '\n\n' +
+				'RISULTATI:\n' +
+				'- TFR in Azienda (netto): ' + nettoAz + '\n' +
+				'- Allianz Bilanciata (netto): ' + nettoBil + '\n' +
+				'- Allianz Azionaria (netto): ' + nettoAzn + '\n\n' +
+				'Nota: Questa \u00E8 una simulazione indicativa.\nPer una consulenza personalizzata, contattami.\n\n' +
+				'Simone Contegiacomo'
+			);
+
+			window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+		});
+
+		// Init
+		aggiornaVersamentoAnnuo();
 	</script>
 
 	<style is:global>
