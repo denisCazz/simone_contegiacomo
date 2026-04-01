@@ -1,0 +1,13 @@
+node_modules
+dist
+.git
+.env
+.env.*
+*.log
+.DS_Store
+.vscode
+.idea
+tests
+playwright-report
+test-results
+.astro

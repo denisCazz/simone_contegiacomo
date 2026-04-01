@@ -1,16 +1,31 @@
 {
-  "name": "",
+  "name": "simone-contegiacomo",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:production": "npm run build",
     "preview": "astro preview",
+    "check": "astro check",
+    "lint": "prettier --check .",
+    "format": "prettier --write .",
+    "security-check": "npm audit && npm outdated",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.3.1",
     "@tailwindcss/vite": "^4.1.17",
     "astro": "^5.16.0",
+    "astro-compressor": "^0.4.1",
     "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "lightningcss": "^1.29.2",
+    "prettier": "^3.5.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "terser": "^5.39.0",
+    "typescript": "^5.8.3"
   }
 }

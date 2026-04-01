@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://simonecontegiacomo.it/sitemap-index.xml
+
+# Blocca aree admin
+Disallow: /admin/
+Disallow: /.well-known/
+
+# Blocca query string per evitare contenuti duplicati
+Disallow: /*?*

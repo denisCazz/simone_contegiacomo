@@ -278,7 +278,7 @@ import Layout from '../layouts/Layout.astro';
 			const serieNetto = [];
 
 			for (let i = 0; i < anni; i++) {
-				montanteLordo = montanteLordo * (1 + rendTfr) + versamentoAnnuo;
+				montanteLordo = (montanteLordo + versamentoAnnuo) * (1 + rendTfr);
 				const taxSoFar = versamentoAnnuo * (i + 1) * aliquotaTfr;
 				serieNetto.push(Math.round(montanteLordo - taxSoFar));
 			}
@@ -299,7 +299,7 @@ import Layout from '../layouts/Layout.astro';
 			const serieNetto = [];
 
 			for (let i = 0; i < anni; i++) {
-				montanteLordo = montanteLordo * (1 + rNetto) + versamentoAnnuo;
+				montanteLordo = (montanteLordo + versamentoAnnuo) * (1 + rNetto);
 				const taxSoFar = versamentoAnnuo * (i + 1) * aliquotaFondo;
 				serieNetto.push(Math.round(montanteLordo - taxSoFar));
 			}
