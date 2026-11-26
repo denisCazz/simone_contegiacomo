@@ -3,21 +3,33 @@ import '../styles/global.css';
 
 interface Props {
 	title: string;
+	description?: string;
 	bodyClass?: string;
 }
 
 const {
 	title,
+	description = 'Sito ufficiale di Simone Contegiacomo',
 	bodyClass = 'bg-slate-50 text-slate-800 font-sans'
 } = Astro.props;
+
+// One canonical URL per page (no www, trailing slash as served by nginx), so
+// Google does not split ranking between www and non-www or duplicate paths.
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!doctype html>
 <html lang="it">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Sito ufficiale di Simone Contegiacomo" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="canonical" href={canonical} />
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="it_IT" />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
